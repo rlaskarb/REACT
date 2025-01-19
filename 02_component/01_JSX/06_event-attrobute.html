@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>맛 보 기</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script> <!-- react cdn링크-->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> <!-- babel 링크크-->
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+
+        /*
+         맛 보 기  : 미 리 
+        
+         1.인라인으로 이벤트 함수 정의
+         2.이벤트 동작시 사용할 이벤트 함수 사전에 정의
+
+        */
+
+        //1.인라인으로 이벤트 함수 정의
+        // const element =(
+        //     <>
+        //     <h1>행운의 편지</h1>
+        //     <button onClick={()=>alert('이편지를 받은사람은 일주일내 다른사람 10명에게 보내지 않으면 이번주 로또 당첨 금액은 없는걸로 알고 계시면 됩니다.')}> 이편지는 영국에서부터 시작했으며..</button>
+        //     </>
+        // );
+
+
+        //2.이벤트 동작시 사용할 외부 함수 정의
+        const onClickHandler =() => {
+            alert('이편지를 받은사람은 일주일내 다른사람 10명에게 보내지 않으면 이번주 로또 당첨 금액은 없는걸로 알고 계시면 됩니다.')
+        }
+        
+        const element =(
+            <>
+            <h1>행운의 편지</h1>
+            <button onClick={onClickHandler}> 이편지는 영국에서부터 시작했으며..</button>
+            </>
+        );
+
+
+
+        ReactDOM.createRoot(document.getElementById('root')).render(element);
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이이인라아이인 스으타아아일으링!!</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script> <!-- react cdn링크-->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> <!-- babel 링크크-->
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        //주의할 점은 카멜케이스로 스타일을 정의 해야 한닷!
+        
+        const style ={
+            backgroundColor : 'black',
+            color : 'white'
+
+        }
+
+
+
+        const element =(
+            <>
+            <h1 style={style}> 아프지 마요 </h1>
+            <h3>GoToBy 잘가.. 멀리 안나갈께</h3>
+            </>
+        );
+
+
+        ReactDOM.createRoot(document.getElementById('root')).render(element);
+
+
+    </script>
+
+</body>
+</html>
