@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이 게 최종 버전 이것만 공부해도 개이득!</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script> <!-- react cdn링크-->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> <!-- babel 링크크-->
+    <script src="https://unpkg.com/prop-types@15.8.1/prop-types.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+    
+    const{useState}=React;
+
+
+    function Login(){
+
+        const [form , setForm] =useState({
+            userId: '',
+            userPwd: ''
+        });
+
+        const{userId,userPwd} = form;
+        
+        const onChangeHandler = e =>{
+                const copyForm = {
+                    ...form , // 스프레드 연산자로 기존 form 객체 복사
+                    // 이벤트가 발생한 name 과 일치하는 프로퍼티 value 를 수정
+                    [e.target.name] : e.target.value
+                }
+                // 통채로 수정한 객체 넘기기
+                setForm(copyForm);
+        }
+
+        const onClickHandler = () =>{
+            alert(`아이디 :${userId} \n비밀번호: 시른데 안알려줄건데!!!`)
+            setForm({
+                userId: '',
+                userPwd:''
+            });
+        }
+
+        return(
+            <>
+                <h2>이게 끝 로그인 상태 관리하기!!!!!!</h2>
+                <label> 아 이 디</label>
+                <input
+                    type="text"
+                    name="userId"
+                    value={userId}
+                    onChange={onChangeHandler}
+                />
+                <br/>
+                <label> 비 밀 번 호 </label> 
+                <input
+                    type="password"
+                    name="userPwd"
+                    value={userPwd}
+                    onChange={onChangeHandler}
+                />
+                <br/>
+                <button onClick={onClickHandler}>로 그 인</button>
+            </>
+        )
+
+    }
+    
+    ReactDOM.createRoot(document.getElementById('root')).render(<Login/>);
+    </script>
+</body>
+</html>
