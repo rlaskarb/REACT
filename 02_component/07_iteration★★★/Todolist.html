@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoList</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script> <!-- react cdn링크-->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> <!-- babel 링크크-->
+    <script src="https://unpkg.com/prop-types@15.8.1/prop-types.js"></script>
+</head>
+<body>
+     <div id="root"></div>
+     <script type="text/babel">
+
+        const{useState} = React;
+    
+
+        // Header 컴포넌트의 정의
+        function Header(){
+            const today = new Date(); // 현재 날짜 가져오기
+            const formattedDate = `${today.getFullYear()}.${today.getMonth()+1}.${today.getDate()}`; // yyyy.mm.d 형식으로 변환
+
+            return(
+                <header style={{backgroundColor : 'black', color:'white', textAlign:'center',marginBottom:'20px'}}>
+                    <h3> 오늘 할 일 {formattedDate} </h3> 
+                </header>
+            );
+        }
+
+
+
+        // Footer 컴포넌트 정의
+
+        function Footer(){
+            return(
+                <footer style={{backgroundColor : 'black', color:'white',textAlign:'center'}}>
+                    <p> "The best way to predict the future is to create it." </p>
+                </footer>
+            );
+
+        }
+
+
+    
+        function App(){
+
+            const [inputValue,setInputValue] = useState(""); // 기본값 설정
+            const [items,setItems] = useState([]) ;  // 입력된 데이터 기본값
+            
+            const handleAdd = () =>{
+                if(inputValue.trim() !== ""){
+                    setItems([...items,inputValue]); // 입력한 값을 목록에 추가
+                    setInputValue(""); // 입력창 기본값
+                }
+            };
+
+            const handleDelete =(index) =>{
+                const newItems = items.filter((_,i) =>i !== index); // 선택된 항목 제외
+                setItems(newItems);
+            };
+
+
+            return(
+                <div>
+                    <Header/>
+                    <main style={{textAlign: 'center', marginTop: '20px'}}>
+                        <input
+                            type="text"
+                            value={inputValue}
+                            onChange={ (e) => setInputValue(e.target.value)}
+                            placeholder = "그냥 놀자  ALT+F4 해"
+                            style={{padding: '5px' , width: '200px' , marginRight : '10px'}}
+                            />
+                        <button
+                            onClick ={handleAdd}
+                            style={{padding : '5px 10px'}}
+                        > 추가하기 </button>  
+                        
+                        <div style={{
+                             marginTop: '20px',
+                             marginLeft: 'auto',
+                             marginRight: 'auto',
+                             width: '300px',
+                             padding: '10px',
+                             border: '1px solid #ccc',
+                             borderRadius: '5px',
+                             backgroundColor: '#f9f9f9'
+                         }}>
+                             <ul style={{ listStyle: 'none', padding: 0 }}>
+                                 {items.map((item, index) => (
+                                     <li key={index} style={{ margin: '10px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                         <span>{item}</span>
+                                         <button 
+                                             onClick={() => handleDelete(index)} 
+                                             style={{ padding: '3px 6px', backgroundColor: 'red', color: 'white', border: 'none', borderRadius: '3px', cursor: 'pointer' }}
+                                         >
+                                             삭제
+                                         </button>
+                                     </li>
+                                 ))}
+                             </ul>
+                         </div>
+                    </main>
+                    <Footer/>
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+
+
+     </script>
+</body>
+</html>
