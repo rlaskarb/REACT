@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NickName Example</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useReducer, useEffect } = React;
+
+        // Reducer 함수: 상태 관리 로직
+        function reducer(state, action) {
+            switch (action.type) {
+                case 'SET_FIELD':
+                    return {
+                        ...state,
+                        [action.field]: action.value,
+                    };
+                default:
+                    return state;
+            }
+        }
+
+        function NickName() {
+            // useReducer 초기화
+            const [form, dispatch] = useReducer(reducer, {
+                userNickName: '',
+                userName: '',
+            });
+
+            // 필드 값 변경 처리
+            const onChangeHandler = (e) => {
+                const { name, value } = e.target;
+                dispatch({ type: 'SET_FIELD', field: name, value });
+            };
+
+            // 닉네임 변경 감지
+            useEffect(() => {
+                console.log('닉네임이 변경되었습니다:', form.userNickName);
+            }, [form.userNickName]);
+
+            // 이름 변경 감지
+            useEffect(() => {
+                console.log('이름이 변경되었습니다:', form.userName);
+            }, [form.userName]);
+
+            return (
+                <>
+                    <label>닉네임</label>
+                    <input type="text" name="userNickName" onChange={onChangeHandler} />
+                    <br />
+                    <label>이름</label>
+                    <input type="text" name="userName" onChange={onChangeHandler} />
+                    <br />
+                    <h3>NickName : {form.userNickName}</h3>
+                    <h3>Name : {form.userName}</h3>
+                </>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<NickName />);
+    </script>
+</body>
+</html>
