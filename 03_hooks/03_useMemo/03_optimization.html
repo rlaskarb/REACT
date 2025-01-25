@@ -23,10 +23,9 @@
             console.log('불량품 계산기')
 
             //의미없는 반복문으로 시간 끌기
-            for(let i =0; i<9999; i++){}
+            for(let i =0; i<999; i++){}
             return num +10000;
         }
-
 
         const easyCalculator = (num) => {
             console.log('일반 계산기')
@@ -35,12 +34,9 @@
         }
 
 
-
-
         function App(){
             const[hardNumber , setHardNumber]=useState(0);
             const[easyNumber , setEasyNumber]=useState(0);
-
 
             /*
              간단한 작업을 할 때에도 시간이 오래걸리는 작업과 함께 수행하기에는 비효율적이기 때문에
@@ -49,20 +45,16 @@
              연산으로 얻은 값 자체를 메모라이즈(메모리 상에 저장) 하기 위해 사용되는 hooks 이 useMemo 이다.
             */
 
-
             //리랜더링 시 마다 지역변수 초기화로 인한 지연 상황 발생생
             const hardSum = useMemo(()=>{
                 console.log('useMemo 어려운 계산기')
                 return hardCalculator(hardNumber);
             },[hardNumber]);
 
-
             const easySum =useMemo(()=>{
                 console.log('useMemo 쉬운 계산기')
                 return easyCalculator(easyNumber);
             },[easyNumber]);
-            
-           
 
             return(
                 <>
