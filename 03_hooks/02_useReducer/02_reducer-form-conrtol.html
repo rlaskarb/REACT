@@ -29,7 +29,7 @@
         }
 
         function NickName() {
-            // useReducer 초기화
+            // useReducer 초기화 하기
             const [form, dispatch] = useReducer(reducer, {
                 userNickName: '',
                 userName: '',
@@ -43,7 +43,7 @@
 
             // 닉네임 변경 감지
             useEffect(() => {
-                console.log('닉네임이 변경되었습니다:', form.userNickName);
+                console.log('닉네임이 변경되었습니다!:', form.userNickName);
             }, [form.userNickName]);
 
             // 이름 변경 감지
