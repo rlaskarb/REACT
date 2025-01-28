@@ -41,12 +41,12 @@
                 dispatch({ type: 'SET_FIELD', field: name, value });
             };
 
-            // 닉네임 변경 감지
+            // 닉네임 변경 감지!!!
             useEffect(() => {
                 console.log('닉네임이 변경되었습니다!:', form.userNickName);
             }, [form.userNickName]);
 
-            // 이름 변경 감지
+            // 이름 변경 감지!!!
             useEffect(() => {
                 console.log('이름이 변경되었습니다:', form.userName);
             }, [form.userName]);
