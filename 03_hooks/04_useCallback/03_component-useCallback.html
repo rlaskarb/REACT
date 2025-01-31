@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>component-useCallback</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script> <!-- react cdn링크-->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> <!-- babel 링크크-->
+    <script src="https://unpkg.com/prop-types@15.8.1/prop-types.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+
+    <script type="text/babel">
+
+        //useCallback 메모이제이션된 콜백을 반환합니다. 이는 불필요한 렌더링을 방지하고 성능을 최적화하는 데 도움이 됩니다.
+        const{useState , useEffect , useCallback} = React;
+
+        function App(){
+
+            const[size,setSize]= useState(100);
+            
+            const[isDark,setIsDark] = useState(false);
+            
+            // const squareStyle = {
+            //     backgroundColor : 'blue',
+            //     width: `${size}px`,
+            //     height: `${size}px`     
+            // }
+
+            const squareStyle = useCallback(()=>{
+                // squareStyle 함수가 호출되면 return 할 객체 정의의
+                return{
+                    backgroundColor : 'orange',
+                    width: `${size}px`,
+                    height: `${size}px` 
+                }
+            },[size]);
+
+
+            const style ={backgroundColor : isDark ? 'purple' : 'white'}
+
+            return(
+                <div style={style}>
+                    <input
+                     type="range"
+                     min ="50"
+                     max ="100"
+                     onChange ={(e) => setSize(e.target.value)}
+                    />
+                    <button onClick={()=>setIsDark(!isDark)}>{isDark.toString()}</button>
+                    <Square squareStyle={squareStyle}/>
+                </div>
+            );
+        }
+
+        function Square({squareStyle}){
+            console.log('squareStyle : ', squareStyle);
+            
+            const[style ,setStyle] = useState({});
+
+            console.log('자식업데이트 확인용 구문');
+
+            /*
+                부모인  App 컴포넌트가 업데이트가 되어 자식인 Square도 리렌더링이 될때,
+                부모가 주는 props 
+            
+            */
+            useEffect(()=>{
+                console.log('style 변켱');
+                setStyle(squareStyle());
+            },[squareStyle]);
+
+            return(
+                <div style={style}>
+                </div>
+            )
+        }
+        
+        ReactDOM.createRoot(document.getElementById('root'))
+            .render(<App/>);
+
+
+    </script>
+</body>
+</html>
