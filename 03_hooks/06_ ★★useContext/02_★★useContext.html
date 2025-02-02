@@ -54,10 +54,9 @@
             유지보수성의 악화와 생산성 저하로 이루어질 수 있다.
             따라서 Context(컨테이너의 개념) 를 사용하게 되면 하위 컴포넌트에게
             props 를 전달하지 않아도 되고, 중앙에서 제어함으로서 유지보수성 향상이 된다.
-
         */
 
-        const{useState , useContext , createContext }=React;
+        const{useState , useContext , createContext }= React;
         // console.log('이건유즈컨텍스트야',useContext);
         // console.log('이건크레이트컨텍스트야',createContext);
     
@@ -81,7 +80,7 @@
                 Provider 란?
                 value 라고 하는 프로퍼티를 이용해서 하위 컴포넌트에게
                 값을 전달(제공)하는 역활을 한다. 이때 값을 전달 받을 수 있는 컴포넌트 수에는 제한이 없다.
-                해당 값을 쓰고 싶은 컴포넌트는 Context의 이름으로 부터 
+                해당 값을 쓰고 싶은 컴포넌트는 Context 의 이름으로 부터 
                 useContext 를 사용하여 필요한 순간 가져다 쓸수 있다.
             */
            
