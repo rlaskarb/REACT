@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>async- await</title>
+</head>
+<body>
+    <script>
+
+        function increase(number){
+
+            const promise = new Promise((resolve,reject) => {
+                setTimeout(()=> {
+                    const result = number+10;
+
+                    if(result > 50){
+                        const error = new Error("숫자가 너무 큽니다.");
+                        return reject(error);
+                    }
+        // 성공시에 사용하는 resolve*(해서,성공)
+        
+                    resolve(result);   
+                    
+                },1000);
+
+
+
+            });
+
+            return promise;
+        }
+
+        /*
+            await 의 기능 
+            1.await 가 달린 함수의 결과인 promise 에 담긴 resolve 결과를 반환하게 된다.
+            2.await 가 달린 비동기 처리들은 동기식으로 동작하게 된다.
+
+        */
+
+        async function run(){
+            try{
+                let result = await increase(0);
+
+                console.log('결과!',result);
+
+                result = await increase(result);
+                console.log('결과2',result);
+
+                result = await increase(result);
+                console.log('결과3',result);
+
+                result = await increase(result);
+                console.log('결과4',result);
+
+                result = await increase(result);
+                console.log('결과5',result);
+
+            }catch(e){
+                console.log(e, '발생!');
+            }
+        }
+        
+        run();
+
+
+    </script>
+</body>
+</html>
