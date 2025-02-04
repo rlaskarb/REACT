@@ -62,7 +62,7 @@
                     axios.get('https://api.github.com/emojis')
                     .then(response => {
                         setImgUrl(response.data[imageName]);
-                    })
+                    });
 
                     
                 }
@@ -80,7 +80,7 @@
 
 
             function ImageBox({imgUrl}){
-                return !!imgUrl ? <img src={imgUrl}/> : <h3>검색결과!</h3>
+                return !!imgUrl ? <img src= {imgUrl}/> : <h3>검색결과!</h3>
             }
         
 
@@ -88,6 +88,7 @@
         
         ReactDOM.createRoot(document.getElementById('root'))
         .render(<App/>);
+
     </script>
 </body>
 </html>
