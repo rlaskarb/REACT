@@ -3,86 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>component-useCallback</title>
+    <title>Document</title>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script> <!-- react cdn링크-->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> <!-- babel 링크크-->
-    <script src="https://unpkg.com/prop-types@15.8.1/prop-types.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
     <div id="root"></div>
 
-
     <script type="text/babel">
 
-        //useCallback 메모이제이션된 콜백을 반환합니다. 이는 불필요한 렌더링을 방지하고 성능을 최적화하는 데 도움이 됩니다.
-        const{useState , useEffect , useCallback} = React;
+        const {useState, useEffect, useCallback} = React;
 
-        function App(){
+        function App() {
+            
+            const [size, setSize] = useState(200);
+            const [isDark, setIsDark] = useState(false);
 
-            const[size,setSize]= useState(100);
-            
-            const[isDark,setIsDark] = useState(false);
-            
+            // 자식 컴포넌트 전달 해줄 값
             // const squareStyle = {
-            //     backgroundColor : 'blue',
+            //     backgroundColor: 'red',
             //     width: `${size}px`,
-            //     height: `${size}px`     
+            //     height: `${size}px`
             // }
 
-            const squareStyle = useCallback(()=>{
-                // squareStyle 함수가 호출되면 return 할 객체 정의의
-                return{
-                    backgroundColor : 'orange',
+            const squareStyle = useCallback(() => {
+                // squareStyle 함수가 호출되면 return 할 객체 정의
+                return {
+                    backgroundColor: 'red',
                     width: `${size}px`,
-                    height: `${size}px` 
+                    height: `${size}px`
                 }
-            },[size]);
-
-
-            const style ={backgroundColor : isDark ? 'purple' : 'white'}
+            }, [size]);
 
             return(
-                <div style={style}>
-                    <input
-                     type="range"
-                     min ="50"
-                     max ="100"
-                     onChange ={(e) => setSize(e.target.value)}
+                <div style={{backgroundColor: isDark ? 'black' : 'white'}}>
+                    <input 
+                        type="range"
+                        min="100"
+                        max="300"
+                        onChange={(e) => setSize(e.target.value)}
                     />
-                    <button onClick={()=>setIsDark(!isDark)}>{isDark.toString()}</button>
+                    <button onClick={() => setIsDark(!isDark)}>{isDark.toString()}</button>
                     <Square squareStyle={squareStyle}/>
                 </div>
             );
         }
 
-        function Square({squareStyle}){
-            console.log('squareStyle : ', squareStyle);
+        function Square({squareStyle}) {
             
-            const[style ,setStyle] = useState({});
-
-            console.log('자식업데이트 확인용 구문');
+            const [style, setStyle] = useState({});
+            
+            console.log('자식 업데이트 확인용 구문');
 
             /*
-                부모인  App 컴포넌트가 업데이트가 되어 자식인 Square도 리렌더링이 될때,
-                부모가 주는 props 
-            
+                부모인 APP 컴포넌트가 업데이트가 되어 자식인 Square도 리렌더링이 될 때,
+                부모가 주는 props 에 변화가 생길 때 자식도 어쩔 수 없이 리렌더링이 된다.
             */
-            useEffect(()=>{
-                console.log('style 변켱');
+            useEffect(() => {
+                console.log('style 변경!!');
                 setStyle(squareStyle());
-            },[squareStyle]);
+            }, [squareStyle]);
 
             return(
-                <div style={style}>
-                </div>
-            )
-        }
-        
-        ReactDOM.createRoot(document.getElementById('root'))
-            .render(<App/>);
+                <div style={style}></div>
+            );
 
+        }
+
+        ReactDOM.createRoot(document.getElementById('root'))
+                .render(<App/>);
 
     </script>
+
 </body>
 </html>

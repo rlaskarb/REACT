@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>? 느린 ㄱ??? 계산기???</title>
+    <title>Document</title>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script> <!-- react cdn링크-->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> <!-- babel 링크크-->
-    <script src="https://unpkg.com/prop-types@15.8.1/prop-types.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
     <div id="root"></div>
@@ -18,44 +17,49 @@
             일부러 시간이 오래걸리는 계산기 만들기
         */
 
-        const{useState}=React;
+        const {useState} = React;
 
-        //전달 받은 값을 계산하는 함수
+        // 전달 받은 값을 계산하는 함수
         const hardCalculator = (num) => {
-            console.log('불량품 계산기')
+            console.log('오래걸리는 계산기 호출됨...');
 
-            //의미없는 반복문으로 시간 끌기
-            for(let i =0; i<99999; i++)
-            return num +10000;
+            // 의미없는 반복문으로 시간 끌기
+            for(let i = 0; i < 999999999; i++) {
+                
+            }
+
+            return num + 10000;
         }
 
-        function App(){
-            const[hardNumber , setHardNumber]=useState(0);
+        function App() {
 
-            //계산을 해주는 함수 호출
+            const [hardNumber, setHardNumber] = useState(0);
+
+            // 계산을 해주는 함수 호출
             const hardSum = hardCalculator(hardNumber);
-            
-            
-            //input 태그에 변화가 생길 때마다 update 시점에 리렌더링 되면서 지역변수 부터 return 구문까지
-            //재실행이 된다 따라서 지역변수가 state 가 변할 때 마다 초기화가 되면서 오래걸리는 함수가 
-            //계속 동작을 하게 되어 화면이 지연이 된다.
+
+            // input 태그에 변화가 생길 때마다 update 시점에
+            // 리랜더링이 되면서 지역변수 부터 return 구문까지 재실행이된다.
+            // 따라서 지역변수는 state 가 변할 때마다 초기화가 되면서
+            // 오래걸리는 함수가 계속 동작을 하게 되어 화면이 지연이 된다.
 
             return(
                 <>
-                <h2>시간이 오래걸리는 계솬기</h2>
-                <input
-                    type="number"
-                    value={hardNumber}
-                    onChange={(e)=>setHardNumber(parseInt(e.target.value))}
-                />
-                <span>+10000={hardSum}</span>
+                    <h3>시간이 오래걸리는 계산기</h3>
+                    <input 
+                        type="number"
+                        value={hardNumber}
+                        onChange={(e) => setHardNumber(parseInt(e.target.value))}
+                    />
+                    <span>+ 10000 = {hardSum}</span>
                 </>
             );
 
         }
 
-        ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
-
+        ReactDOM.createRoot(document.getElementById('root'))
+                .render(<App/>);
     </script>
+
 </body>
 </html>
