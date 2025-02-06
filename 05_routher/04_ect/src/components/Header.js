@@ -3,7 +3,7 @@
 function Header(){
     return(
         <div>
-            <h1>해더</h1>
+            <h1>여긴 어디?</h1>
         </div>
     );
 }

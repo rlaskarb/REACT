@@ -8,7 +8,7 @@ import {getMenuByMenuCode} from '../apis/MenuAPI';
 
 function MenuDetails() {
 
-    // useParams 에 pathvariable 이 들어있는 거 확인
+    // useParams 에 pathVariable 이 들어있는 거 확인
     // console.log(useParams());
     const {menuCode} = useParams();
     const [menu, setMenu] = useState({
