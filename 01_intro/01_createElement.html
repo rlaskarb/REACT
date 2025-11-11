@@ -1,20 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #root {
+            width: 100%;
+            margin: 50px auto;
+
+            h1 {
+                text-align: center;
+                font-size: 50px;
+                color: red;
+            }
+
+            h3 {
+                text-align: center;
+                font-size: 30px;
+            }
+        }
+    </style>
     <!--
         React 기술을 사용하기 위한 CDN 링크 삽입
     -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 </head>
+
 <body>
     <div id="root"></div>
 
     <script>
-        
+
         /* 
             React.createElement 함수를 사용해서 h1 태그 엘리먼트 생성.
             첫 번째 인자 : 만들려는 엘리먼트의 타입을 문자열로 정의
@@ -27,12 +51,13 @@
             알려주는 자바스크립트 객체에 불과하다.
         */
 
-        const helloElement = React.createElement("h1", {className: 'hi', id: "hi"}, 'hello world!!!');
-        const textElement = React.createElement("h3", {id: "hi"}, '안녕하세요!');
+        const helloElement = React.createElement("h1", { className: 'hi', id: "hi" }, 'hello world!!!');
+        const textElement = React.createElement("h3", { id: "hi" }, '안녕하세요!');
 
-        
+
         ReactDOM.createRoot(document.getElementById('root')).render([helloElement, textElement]);
     </script>
 
 </body>
+
 </html>
